@@ -2,7 +2,6 @@
 
 /**
  * * printf_bin - prints a binary number.
- *
  * * @val: arguments.
  * *
  * * Return: 1.
