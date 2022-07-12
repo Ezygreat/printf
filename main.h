@@ -75,7 +75,6 @@ typedef struct flag_s
 	unsigned char value;
 } flag_t;
 
-
 int _printf(const char *format, ...);
 int _putchar(char c);
 
