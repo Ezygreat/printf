@@ -76,7 +76,6 @@ typedef struct flag_s
 } flag_t;
 
 int _printf(const char *format, ...);
-int _putchar(char c);
 
 /* Conversion Specifier Functions */
 unsigned int convert_c(va_list args, buffer_t *output,
