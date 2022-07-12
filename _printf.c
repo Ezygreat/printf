@@ -1,8 +1,25 @@
 #include "main.h"
 
-void cleanup(va_list args, buffer_t *output);
-int run_printf(const char *format, va_list args, buffer_t *output);
-int _printf(const char *format, ...);
+/**
+ * count_one_bits - Counts the number of bits set
+ *                  to one in a binary number.
+ * @num: The binary number.
+ *
+ * Return: The number of bits set to one.
+ */
+
+unsigned char count_one_bits(unsigned char num)
+{
+	unsigned char count = 0;
+
+	while (num != 0)
+	{
+		if ((num & 1) == 1)
+			count++;
+		num >>= 1;
+	}
+	return (count);
+}
 
 
 /**
@@ -30,9 +47,9 @@ void cleanup(va_list args, buffer_t *output)
 
 int run_printf(const char *format, va_list args, buffer_t *output)
 {
-	int i, wid, prec, ret = 0;
-	char tmp;
-	unsigned char flags, len;
+	int i, ret = 0;
+	char wid, prec, tmp;
+	unsigned char flag, len;
 	unsigned int (*f)(va_list, buffer_t *,
 			unsigned char, int, int, unsigned char);
 
@@ -41,18 +58,18 @@ int run_printf(const char *format, va_list args, buffer_t *output)
 		len = 0;
 		if (*(format + i) == '%')
 		{
-			tmp = 0;
-			flags = operate_flags(format + i + 1, &tmp);
+			tmp = count_one_bits(flag);
+			flag = operate_flags(format + i + 1);
 			wid = operate_width(args, format + i + tmp + 1, &tmp);
-			prec = operate_precision(args, format + i + tmp + 1,
-						&tmp);
-			len = operate_length(format + i + tmp + 1, &tmp);
+			prec = operate_precision(args, format + i + tmp + 1, &tmp);
+			len = operate_length(format + i + tmp + 1);
+			tmp += (len != 0) ? 1 : 0;
 			f = operate_specifiers(format + i + tmp + 1);
 
 			if (f != NULL)
 			{
 				i += tmp + 1;
-				ret += f(args, output, flags, wid, prec, len);
+				ret += f(args, output, flag, wid, prec, len);
 				continue;
 			}
 			else if (*(format + i + tmp + 1) == '\0')
