@@ -37,7 +37,6 @@ unsigned int convert_s(va_list args, buffer_t *output,
 	(void)len;
 
 	str = va_arg(args, char *);
-
 	if (str == NULL)
 		return (_memcpy(output, null, 6));
 
@@ -45,12 +44,10 @@ unsigned int convert_s(va_list args, buffer_t *output,
 		size++;
 
 	if (NEG_FLAG == 0)
-
 	{
 		for (wid -= (prec == -1) ? size : prec; wid > 0; wid--)
 			ret += _memcpy(output, &width, 1);
 	}
-
 	prec = (prec == -1) ? (int)size : prec;
 	while (*str != '\0' && prec > 0)
 	{
@@ -60,12 +57,10 @@ unsigned int convert_s(va_list args, buffer_t *output,
 	}
 
 	if (NEG_FLAG == 1)
-
 	{
 		for (wid -= ret; wid > 0; wid--)
 			ret += _memcpy(output, &width, 1);
 	}
-
 	return (ret);
 }
 
@@ -102,7 +97,6 @@ unsigned int convert_S(va_list args, buffer_t *output,
 		return (_memcpy(output, null, 6));
 	for (size = 0; str[size];)
 		size++;
-
 	if (NEG_FLAG == 0)
 	{
 		for (wid -= (prec == -1) ? size : prec; wid > 0; wid--)
@@ -118,7 +112,7 @@ unsigned int convert_S(va_list args, buffer_t *output,
 				ret += _memcpy(output, zero, 1);
 			ret += convert_ubase(output, *(str + index),
 					"0123456789ABCDEF", flags, 0, 0);
-			continue;
+			continue
 		}
 		ret += _memcpy(output, (str + index), 1);
 	}
@@ -170,7 +164,6 @@ unsigned int convert_r(va_list args, buffer_t *output,
 
 	end = size - 1;
 	prec = (prec == -1) ? (int)size : prec;
-
 	for (i = 0; end >= 0 && i < prec; i++)
 	{
 		ret += _memcpy(output, (str + end), 1);
@@ -182,7 +175,6 @@ unsigned int convert_r(va_list args, buffer_t *output,
 		for (wid -= ret; wid > 0; wid--)
 			ret += _memcpy(output, &width, 1);
 	}
-
 	return (ret);
 }
 
@@ -236,7 +228,7 @@ unsigned int convert_R(va_list args, buffer_t *output,
 		}
 		if (j == 52)
 			ret += _memcpy(output, (str + i), 1);
-	}
+		}
 	if (NEG_FLAG == 1)
 	{
 		for (wid -= ret; wid > 0; wid--)
