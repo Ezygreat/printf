@@ -56,8 +56,8 @@ unsigned int convert_di(va_list args, buffer_t *output,
 		ret += _memcpy(output, &plus, 1);
 /*Print negative sign when zero flag is active */
 	if (ZERO_FLAG == 1 && d < 0)
-		ret += _memcpy(output, &neg, 1)
-		pad = (ZERO_FLAG == 1) ? '0' : ' ';
+	ret += _memcpy(output, &neg, 1);
+	pad = (ZERO_FLAG == 1) ? '0' : ' ';
 	for (wid -= count; wid > 0; wid--)
 		ret += _memcpy(output, &pad, 1);
 	}
@@ -156,8 +156,8 @@ unsigned int convert_u(va_list args, buffer_t *output,
 	if (len == SHORT)
 		num = (unsigned short)num;
 	if (!(num == 0 && prec == 0))
-		ret += convert_ubase(output, num, "0123456789",
-				flags, wid, prec);
-		ret += print_neg_width(output, ret, flags, wid);
+	ret += convert_ubase(output, num, "0123456789",
+			flags, wid, prec);
+	ret += print_neg_width(output, ret, flags, wid);
 	return (ret);
 }
